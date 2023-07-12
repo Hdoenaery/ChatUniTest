@@ -2,7 +2,9 @@ import configparser
 
 # Use configparser.ConfigParser() to read config.ini file.
 config = configparser.ConfigParser()
-config.read("../config/config.ini")
+config.read("/home/zxc/CUT/ChatUniTest/ChatUniTest/config/config.ini")
+#config.read("ChatUniTest/ChatUniTest/config/config.ini")
+#config.read("../config/config.ini")
 
 process_number = eval(config.get("DEFAULT", "process_number"))
 test_number = eval(config.get("DEFAULT", "test_number"))
@@ -17,6 +19,8 @@ TEMPLATE_ERROR = config.get("DEFAULT", "PROMPT_TEMPLATE_ERROR")
 
 LANGUAGE = config.get("DEFAULT", "LANGUAGE")
 GRAMMAR_FILE = config.get("DEFAULT", "GRAMMAR_FILE")
+
+#print("GRAMMAR_FILE = ", GRAMMAR_FILE)
 COBERTURA_DIR = config.get("DEFAULT", "COBERTURA_DIR")
 JUNIT_JAR = config.get("DEFAULT", "JUNIT_JAR")
 MOCKITO_JAR = config.get("DEFAULT", "MOCKITO_JAR")
@@ -28,6 +32,7 @@ REPORT_FORMAT = config.get("DEFAULT", "REPORT_FORMAT")
 dataset_dir = config.get("DEFAULT", "dataset_dir")
 result_dir = config.get("DEFAULT", "result_dir")
 project_dir = config.get("DEFAULT", "project_dir")
+print('project_dir = %s' % project_dir)
 
 api_keys = eval(config.get("openai", "api_keys"))
 model = config.get("openai", "model")

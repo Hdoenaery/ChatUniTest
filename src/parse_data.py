@@ -8,7 +8,7 @@ Date: 2023-04-01
 
 import json
 import os
-from database import database
+from ChatUniTest.ChatUniTest.src.database import database
 
 
 def parse_data(dir_path: str):
@@ -17,10 +17,15 @@ def parse_data(dir_path: str):
     :param dir_path: the path of the .json files.
     :return: None
     """
+    print('here is parse_data')
+    print('dir_path = %s' % dir_path)
     db = database()
     for root, dirs, files in os.walk(dir_path):
+        print('root = %s'%root)
         for filename in files:
+            print('filename = %s' % filename)
             if filename.endswith('.json'):
+                print('success in')
                 with open(os.path.join(root, filename), "r") as f:
                     json_data = json.load(f)
 

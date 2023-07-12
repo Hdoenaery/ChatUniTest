@@ -3,7 +3,7 @@ import os
 import subprocess
 import re
 from datetime import datetime
-from config import *
+from ChatUniTest.ChatUniTest.src.config import *
 
 
 class TestRunner:
@@ -42,11 +42,14 @@ class TestRunner:
             test_file = os.path.abspath(glob.glob(temp_dir + '/*.java')[0])
             compiler_output = os.path.join(temp_dir, 'compile_error')
             test_output = os.path.join(temp_dir, 'runtime_error')
+            print("start single test")
             if not self.run_single_test(test_file, compiled_test_dir, compiler_output, test_output):
+                print("start single test FALSE!!!!!")
                 return False
             else:
                 self.report(compiled_test_dir, temp_dir)
         except Exception as e:
+            print("start single test BUGG!!!!!")
             print(e)
             return False
         return True
@@ -103,13 +106,16 @@ class TestRunner:
         Run a test case.
         :return: Whether it is successful or no.
         """
+        print("run single test")
         if not self.compile(test_file, compiled_test_dir, compiler_output):
             return False
+        print("run11111")
         if os.path.basename(test_output) == 'runtime_error':
             test_output_file = f"{test_output}.txt"
         else:
             test_output_file = f"{test_output}-{os.path.basename(test_file)}.txt"
         cmd = self.java_cmd(compiled_test_dir, test_file)
+        print("run22222")
         try:
             result = subprocess.run(cmd, timeout=TIMEOUT,
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -138,9 +144,14 @@ class TestRunner:
         :param compiled_test_dir: the directory to store compiled tests
         :param compiler_output:
         """
+        print("in compile")
         os.makedirs(compiled_test_dir, exist_ok=True)
+        print("compiled_test_dir = " , compiled_test_dir)
+        print("test_file = " , test_file)
         cmd = self.javac_cmd(compiled_test_dir, test_file)
+        print("finish javac_cmd")
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        print("finish run")
         if result.returncode != 0:
             self.COMPILE_ERROR += 1
             if os.path.basename(compiler_output) == 'compile_error':
@@ -150,6 +161,7 @@ class TestRunner:
             with open(compiler_output_file, "w") as f:
                 f.write(result.stdout)
                 f.write(result.stderr)
+            print("FALSE!!!!!")
             return False
         return True
 

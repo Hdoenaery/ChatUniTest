@@ -8,9 +8,9 @@ Date: 2023-04-01
 
 import os
 import json
-from database import database
+from ChatUniTest.ChatUniTest.src.database import database
 
-dataset_path = "../dataset/"
+dataset_path = "ChatUniTest/ChatUniTest/dataset/"
 db = database()
 
 

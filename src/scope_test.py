@@ -4,10 +4,10 @@ It will automatically create a new folder inside dataset as well as result folde
 The folder format is "scope_test_YYYYMMDDHHMMSS_Direction".
 The dataset folder will contain all the information in the direction.
 """
-from tools import *
-from askGPT import start_whole_process
-from database import database
-from task import Task
+from ChatUniTest.ChatUniTest.src.tools import *
+from ChatUniTest.ChatUniTest.src.askGPT import start_whole_process
+from ChatUniTest.ChatUniTest.src.database import database
+from ChatUniTest.ChatUniTest.src.task import Task
 from colorama import Fore, Style, init
 
 init()
@@ -106,7 +106,8 @@ def start_generation(sql_query, multiprocess=True, repair=True, confirmed=False)
 
     # Find all the files
     source_dir = os.path.join(dataset_dir, "direction_1")
-
+    print("source_dir = " , source_dir)
+    print("result_path = " , result_path)
     start_whole_process(source_dir, result_path, multiprocess=multiprocess, repair=repair)
     print("WHOLE PROCESS FINISHED")
     # Run accumulated tests

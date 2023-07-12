@@ -1,5 +1,5 @@
 import mysql.connector
-from config import config
+from ChatUniTest.ChatUniTest.src.config import config
 import warnings
 
 
@@ -167,8 +167,35 @@ def drop_table():
     Truncate table method and class if they do exist.
     """
     db = database()
+    db.connect()
+
+    table_name = 'class'
+    exists = False
+    try:
+        db.cursor.execute(f"SHOW TABLES LIKE '{table_name}';")
+        result = db.cursor.fetchone()
+        exists = result is not None
+    except mysql.connector.Error as e:
+        print(f"Error checking table existence: {e}")
+
     sql_script = """
         DROP TABLE `class`;
+    """
+    if exists:
+        db.execute(sql_script)
+
+    table_name = 'method'
+    exists = False
+    try:
+        db.cursor.execute(f"SHOW TABLES LIKE '{table_name}';")
+        result = db.cursor.fetchone()
+        exists = result is not None
+    except mysql.connector.Error as e:
+        print(f"Error checking table existence: {e}")
+
+    sql_script = """
         DROP TABLE `method`;
     """
-    db.execute(sql_script)
+    if exists:
+        db.execute(sql_script)
+
