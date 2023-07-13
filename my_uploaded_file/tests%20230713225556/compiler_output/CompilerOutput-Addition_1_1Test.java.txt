@@ -1,0 +1,31 @@
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_1Test.java:13: error: cannot find symbol
+    private Addition addition;
+            ^
+  symbol:   class Addition
+  location: class Addition_1_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_1Test.java:17: error: cannot find symbol
+        addition = spy(new Addition());
+                           ^
+  symbol:   class Addition
+  location: class Addition_1_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_1Test.java:42: error: cannot find symbol
+            Addition.class.getMethod("main", String[].class).invoke(null, (Object) null);
+            ^
+  symbol:   class Addition
+  location: class Addition_1_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_1Test.java:49: error: cannot find symbol
+        verify(JOptionPane, times(2)).showInputDialog(anyString());
+               ^
+  symbol:   variable JOptionPane
+  location: class Addition_1_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_1Test.java:50: error: cannot find symbol
+        verify(JOptionPane).showMessageDialog(any(), anyString(), anyString(), anyInt());
+               ^
+  symbol:   variable JOptionPane
+  location: class Addition_1_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_1Test.java:51: error: cannot find symbol
+        verify(System).exit(0);
+               ^
+  symbol:   variable System
+  location: class Addition_1_1Test
+6 errors

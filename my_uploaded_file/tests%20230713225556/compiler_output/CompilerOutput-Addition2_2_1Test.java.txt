@@ -1,0 +1,26 @@
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_1Test.java:25: error: cannot find symbol
+        try (MockedStatic<Addition2> mockedStatic = Mockito.mockStatic(Addition2.class)) {
+                          ^
+  symbol:   class Addition2
+  location: class Addition2_2_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_1Test.java:25: error: cannot find symbol
+        try (MockedStatic<Addition2> mockedStatic = Mockito.mockStatic(Addition2.class)) {
+                                                                       ^
+  symbol:   class Addition2
+  location: class Addition2_2_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_1Test.java:26: error: cannot find symbol
+            mockedStatic.when(Addition2::main).thenCallRealMethod();
+                              ^
+  symbol:   variable Addition2
+  location: class Addition2_2_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_1Test.java:27: error: cannot find symbol
+            Addition2.main(new String[]{});
+            ^
+  symbol:   variable Addition2
+  location: class Addition2_2_1Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_1Test.java:33: error: cannot find symbol
+        return new String(System.out.toByteArray());
+                                    ^
+  symbol:   method toByteArray()
+  location: variable out of type PrintStream
+5 errors

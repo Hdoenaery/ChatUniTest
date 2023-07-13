@@ -1,0 +1,9 @@
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_2Test.java:19: error: 'void' type not allowed here
+		when(mockOptionPane.showMessageDialog(any(), any(), any(), any())).thenReturn(null);
+		                                     ^
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_2Test.java:26: error: cannot find symbol
+			Addition.class.getDeclaredMethod("main", String[].class).invoke(null, (Object) null);
+			^
+  symbol:   class Addition
+  location: class Addition_1_2Test
+2 errors

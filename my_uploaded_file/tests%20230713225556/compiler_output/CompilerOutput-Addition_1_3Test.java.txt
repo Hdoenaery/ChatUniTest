@@ -1,0 +1,19 @@
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_3Test.java:16: error: 'void' type not allowed here
+        when(mockOptionPane.showMessageDialog(any(), any(), any(), anyInt())).thenReturn(null);
+                                             ^
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_3Test.java:22: error: cannot find symbol
+        Addition addition = new Addition();
+        ^
+  symbol:   class Addition
+  location: class Addition_1_3Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_3Test.java:22: error: cannot find symbol
+        Addition addition = new Addition();
+                                ^
+  symbol:   class Addition
+  location: class Addition_1_3Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition_1_3Test.java:26: error: cannot find symbol
+            java.lang.reflect.Method privateMethod = Addition.class.getDeclaredMethod("main", String[].class);
+                                                     ^
+  symbol:   class Addition
+  location: class Addition_1_3Test
+4 errors

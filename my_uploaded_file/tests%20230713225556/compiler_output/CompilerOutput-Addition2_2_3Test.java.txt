@@ -1,0 +1,21 @@
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_3Test.java:15: error: cannot find symbol
+    private Addition2 addition2;
+            ^
+  symbol:   class Addition2
+  location: class Addition2_2_3Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_3Test.java:19: error: cannot find symbol
+        addition2 = new Addition2();
+                        ^
+  symbol:   class Addition2
+  location: class Addition2_2_3Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_3Test.java:35: error: cannot find symbol
+            Addition2.main(new String[]{});
+            ^
+  symbol:   variable Addition2
+  location: class Addition2_2_3Test
+/home/zxc/CUT/ChatUniTest/ChatUniTest/my_uploaded_file/tests%20230713225556/test_cases/Addition2_2_3Test.java:45: error: cannot find symbol
+        return outContent.toString();
+               ^
+  symbol:   variable outContent
+  location: class Addition2_2_3Test
+4 errors
