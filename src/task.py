@@ -2,10 +2,10 @@ import subprocess
 import signal
 import time
 import concurrent.futures
-from ChatUniTest.ChatUniTest.src.test_runner import TestRunner
-from ChatUniTest.ChatUniTest.src.class_parser import ClassParser
-from ChatUniTest.ChatUniTest.src.tools import *
-from ChatUniTest.ChatUniTest.src.config import *
+from test_runner import TestRunner
+from class_parser import ClassParser
+from tools import *
+from config import *
 from colorama import Fore, init
 
 
@@ -16,13 +16,13 @@ class Task:
         """
         Run test task, make sure the target project has be compiled and installed.(run `mvn compile install`)
         """
-        print("test_path = ", test_path)
-        print("target_path = ", target_path)
+        #print("test_path = ", test_path)
+        #print("target_path = ", target_path)
         test_task = TestTask(test_path, target_path)
-        print("right now in single test")
+        #print("right now in single test")
         
         temp =  test_task.single_test()
-        print("temp = ",temp)
+        #print("temp = ",temp)
         return temp
     @staticmethod
     def all_test(test_path, target_path):
@@ -38,7 +38,7 @@ class Task:
         Run parse task, extract class information of target project.
         """
         parse_task = ParseTask()
-        print('target_path = %s' % target_path)
+        #print('target_path = %s' % target_path)
         return parse_task.parse_project(target_path)
 
 
@@ -59,15 +59,15 @@ class TestTask:
         Only run tests.
         tests directory path, e.g., /data/share/TestGPT_ASE/result/scope_test%20230414210243%d3_1/1460%lang_1_f%ToStringBuilder%append%d3/5
         """
-        print("in single test")
+        #print("in single test")
         if check_java_version() != 11:
             raise Exception(Fore.RED + "Wrong java version! Need: java 11")
-        print("single11111")
+        #print("single11111")
         if self.target_path.endswith("_f") or self.target_path.endswith("_b"):  # defects4j project
-            print("single22222")
+            #print("single22222")
             return self.start_d4j()
         else:  # general project
-            print("single33333")
+            #print("single33333")
             return self.runner.start_single_test()
 
     def all_test(self):
@@ -174,7 +174,7 @@ class ParseTask:
 
     def __init__(self):
         self.parser = ClassParser(GRAMMAR_FILE, LANGUAGE)
-        self.output = "ChatUniTest/ChatUniTest/class_info/"
+        self.output = "../class_info/"
 
     def parse_project(self, target_path):
         """
@@ -184,11 +184,11 @@ class ParseTask:
         target_path = target_path.rstrip('/')
         os.makedirs(self.output, exist_ok=True)
         if target_path.endswith("_f") or target_path.endswith("_b"):
-            _, output_path = self.process_d4j_revisions(target_path, 'ChatUniTest/ChatUniTest/src/scripts/focal_classes.json')
-            print("parse_project.target_path = ",target_path)
+            _, output_path = self.process_d4j_revisions(target_path, './scripts/focal_classes.json')
+            #print("parse_project.target_path = ",target_path)
             return output_path
         tot_m, output_path = self.find_classes(target_path)
-        print("parse_project.output_path = ",output_path)
+        #print("parse_project.output_path = ",output_path)
         return output_path
 
     def find_classes(self, target_path):
@@ -199,32 +199,31 @@ class ParseTask:
         # Run analysis
         print("Parse", target_path, " ...")
         if not os.path.exists(target_path):
-            print("00000000")
             return 0, ""
         # Test Classes
         try:
             result = subprocess.check_output(r'grep -l -r @Test --include \*.java {}'.format(target_path), shell=True)
-            print('task_result = %s' % result)
+            #print('task_result = %s' % result)
             tests = result.decode('ascii').splitlines()
         except:
-            print('BUG!!!!!')
+            #print('BUG!!!!!')
             tests = []
         # Java Files
         try:
             result = subprocess.check_output(['find', target_path, '-name', '*.java'])
-            print("result = ",result)
+            #print("result = ",result)
             java = result.decode('ascii').splitlines()
-            print("java = ",java)
+            #print("java = ",java)
         except:
             return 0, ""
         # All Classes exclude tests
         focals = list(set(java) - set(tests))
-        print("focals = ",focals)
+        #print("focals = ",focals)
         focals = [f for f in focals if not "src/test" in f]
-        print("focals = ",focals)
+        #print("focals = ",focals)
         project_name = os.path.split(target_path)[1]
         output = os.path.join(self.output, project_name)
-        print("find_classes.output = ",output)
+        #print("find_classes.output = ",output)
         os.makedirs(output, exist_ok=True)
         return self.parse_all_classes(focals, project_name, output), output
 
@@ -232,7 +231,7 @@ class ParseTask:
         classes = {}
         for focal in focals:
             parsed_classes = self.parser.parse_file(focal)
-            print(parsed_classes)
+            #print(parsed_classes)
             for _class in parsed_classes:
                 _class["project_name"] = project_name
 

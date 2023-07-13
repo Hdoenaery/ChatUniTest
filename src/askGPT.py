@@ -2,17 +2,17 @@ import copy
 import os.path
 import time
 import openai
-from ChatUniTest.ChatUniTest.src.tools import *
+from tools import *
 import random
 import concurrent.futures
 import javalang
 import jinja2
 from colorama import Fore, Style, init
-from ChatUniTest.ChatUniTest.src.task import Task
+from task import Task
 
 init()
 # Create a jinja2 environment
-env = jinja2.Environment(loader=jinja2.FileSystemLoader('ChatUniTest/ChatUniTest/prompt'))
+env = jinja2.Environment(loader=jinja2.FileSystemLoader('../prompt'))
 
 
 def ask_chatgpt(messages, save_path):
@@ -25,7 +25,7 @@ def ask_chatgpt(messages, save_path):
     # Send a request to OpenAI
     # Max prompt token exceeded, no need to send request.
     #print("messages = ", messages)
-    print("save_path = ",save_path)
+    #print("save_path = ",save_path)
 
     if get_messages_tokens(messages) > MAX_PROMPT_TOKENS:
         return False
@@ -34,14 +34,14 @@ def ask_chatgpt(messages, save_path):
     max_try = 5
     while max_try:
         try:
-            print("max_try = ",max_try)
+            #print("max_try = ",max_try)
             completion = openai.ChatCompletion.create(messages=messages,
                                                       model=model,
                                                       temperature=temperature,
                                                       top_p=top_p,
                                                       frequency_penalty=frequency_penalty,
                                                       presence_penalty=presence_penalty)
-            print("success completion")
+            #print("success completion")
             with open(save_path, "w") as f:
                 json.dump(completion, f)
             return True
@@ -90,7 +90,7 @@ def generate_messages(template_name, context_file):
     messages = []
 
     system_name = f"{template_name.split('.')[0]}_system.jinja2"
-    system_path = os.path.join("ChatUniTest/ChatUniTest/prompt", system_name)
+    system_path = os.path.join("../prompt", system_name)
     if os.path.exists(system_path):
         system_message = generate_prompt(system_name, {})
         messages.append({"role": "system", "content": system_message})
@@ -297,7 +297,7 @@ def extract_and_run(input_string, output_path, class_name, method_id, test_num, 
     :param output_path:
     :return:
     """
-    print("in extract and run")
+    #print("in extract and run")
     result = {}
     # 1. Extract the code
     has_code, extracted_code, has_syntactic_error = extract_code(input_string)
@@ -306,15 +306,15 @@ def extract_and_run(input_string, output_path, class_name, method_id, test_num, 
     result["has_code"] = has_code
     result["source_code"] = extracted_code
 
-    print("")
-    print("has_code  =  ", has_code)
-    print("")
-    print("extracted_code  =  " , extracted_code)
+    #print("")
+    #print("has_code  =  ", has_code)
+    #print("")
+    #print("extracted_code  =  " , extracted_code)
     if package:
         result["source_code"] = repair_package(extracted_code, package)
     result["has_syntactic_error"] = has_syntactic_error
     # 2. Run the code
-    print(888888)
+    #print(888888)
     temp_dir = os.path.join(os.path.dirname(output_path), "temp")
     if os.path.exists(temp_dir):
         shutil.rmtree(temp_dir)
@@ -322,7 +322,7 @@ def extract_and_run(input_string, output_path, class_name, method_id, test_num, 
 
     export_method_test_case(os.path.abspath(temp_dir), class_name, method_id, test_num,
                             change_class_name(result["source_code"], class_name, method_id, test_num))
-    print(999999)
+    #print(999999)
     # run test
     response_dir = os.path.abspath(os.path.dirname(output_path))
     target_dir = os.path.abspath(project_dir)
@@ -482,17 +482,17 @@ def whole_process(test_num, base_name, base_dir, repair, submits, total):
                             print(progress, Fore.RED + "Tokens not enough, test fatal error...", Style.RESET_ALL)
                             break
                 # print(Fore.BLUE, messages[1]['content'], Style.RESET_ALL)
-            print("start ask chatgpt")
+            #print("start ask chatgpt")
             status = ask_chatgpt(messages, gpt_file_name)
             print("finish ask chatgpt")
             if not status:
                 print(progress, Fore.RED + 'OpenAI Fail processing messages', Style.RESET_ALL)
                 break
-            print(111111)
+            #print(111111)
             with open(gpt_file_name, "r") as f:
                 gpt_result = json.load(f)
-            print("gpt_file_name = ", gpt_file_name)
-            print("gpt_result   =   ",gpt_result)
+            #print("gpt_file_name = ", gpt_file_name)
+            #print("gpt_result   =   ",gpt_result)
             # 2. Extract information from GPT, and RUN save the result
             steps += 1
 
@@ -551,7 +551,7 @@ def whole_process(test_num, base_name, base_dir, repair, submits, total):
                 break
             print(666666)
     except Exception as e:
-        print(777777)
+        print("askGPT.py Capture Exceptions")
         print(progress, Fore.RED + str(e), Style.RESET_ALL)
     if os.path.exists(run_temp_dir):
         run_temp_dir = os.path.abspath(run_temp_dir)

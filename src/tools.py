@@ -1,6 +1,6 @@
 import math
 import shutil
-from ChatUniTest.ChatUniTest.src.config import *
+from config import *
 import os
 import json
 import psutil
@@ -117,9 +117,8 @@ def get_project_abspath():
 
 def remove_single_test_output_dirs(project_path):
     prefix = "test_"
-
+    #print("remove_single_test_output_dirs.project_path = ", project_path)
     # Get a list of all directories in the current directory with the prefix
-    print("remove_single_test_output_dirs.project_path = ", project_path)
     directories = [d for d in os.listdir(project_path) if os.path.isdir(d) and d.startswith(prefix)]
 
     # Iterate through the directories and delete them if they are not empty
@@ -195,15 +194,15 @@ def get_openai_message(content):
 
 
 def check_java_version():
-    print("in check java version")
+    #print("in check java version")
     java_home = os.environ.get('JAVA_HOME')
-    print("java_home = ")
-    print(java_home)
+    #print("java_home = ")
+    #print(java_home)
     if 'jdk-17' in java_home:
-        print(17)
+        #print(17)
         return 17
     elif 'jdk-11' in java_home or 'java-11' in java_home:
-        print(11)
+        #print(11)
         return 11
 
 
@@ -257,7 +256,7 @@ def export_method_test_case(output, class_name, m_id, test_num, method_test_case
     """
     method_test_case = add_timeout(method_test_case)
     f = os.path.join(output, class_name + "_" + str(m_id) + '_' + str(test_num) + "Test.java")
-    print("output = ",output)
+    #print("output = ",output)
     if not os.path.exists(output):
         os.makedirs(output)
         print("yyyyyyes")

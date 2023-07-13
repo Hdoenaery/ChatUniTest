@@ -1,4 +1,4 @@
-from ChatUniTest.ChatUniTest.src.tools import *
+from tools import *
 from bs4 import BeautifulSoup
 
 

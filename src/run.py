@@ -1,13 +1,13 @@
 import os.path
 import time
 
-from ChatUniTest.ChatUniTest.src.tools import *
-from ChatUniTest.ChatUniTest.src.database import *
-from ChatUniTest.ChatUniTest.src.parse_data import parse_data
-from ChatUniTest.ChatUniTest.src.export_data import export_data
-from ChatUniTest.ChatUniTest.src.scope_test import start_generation
-from ChatUniTest.ChatUniTest.src.parse_xml import result_analysis
-from ChatUniTest.ChatUniTest.src.task import Task
+from tools import *
+from database import *
+from parse_data import parse_data
+from export_data import export_data
+from scope_test import start_generation
+from parse_xml import result_analysis
+from task import Task
 
 
 def clear_dataset():
@@ -33,8 +33,8 @@ def run():
 
     # Parse project
     info_path = Task.parse(project_dir)
-    print('project_dir = %s' % project_dir)
-    print('info_path = %s' % info_path)
+    #print('project_dir = %s' % project_dir)
+    #print('info_path = %s' % info_path)
     # Parse data
     parse_data(info_path)
 

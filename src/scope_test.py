@@ -4,10 +4,10 @@ It will automatically create a new folder inside dataset as well as result folde
 The folder format is "scope_test_YYYYMMDDHHMMSS_Direction".
 The dataset folder will contain all the information in the direction.
 """
-from ChatUniTest.ChatUniTest.src.tools import *
-from ChatUniTest.ChatUniTest.src.askGPT import start_whole_process
-from ChatUniTest.ChatUniTest.src.database import database
-from ChatUniTest.ChatUniTest.src.task import Task
+from tools import *
+from askGPT import start_whole_process
+from database import database
+from task import Task
 from colorama import Fore, Style, init
 
 init()
@@ -71,7 +71,7 @@ def start_generation(sql_query, multiprocess=True, repair=True, confirmed=False)
     match = re.search(r"project_name\s*=\s*'([\w-]*)'", sql_query)
     if match:
         project_name = match.group(1)
-        print(project_name)
+        #print(project_name)
     else:
         raise RuntimeError("One project at one time.")
     # delete the old result
@@ -86,28 +86,33 @@ def start_generation(sql_query, multiprocess=True, repair=True, confirmed=False)
     print("The number of methods is ", len(method_ids), ".")
     print("The approximate cost will be", Fore.RED + "$", len(method_ids) * 0.0184 * test_number, ".", Style.RESET_ALL)
     record = "This is a record of a scope test.\n"
-    if not confirmed:
+    '''if not confirmed:
         confirm = input("Are you sure to start the scope test? (y/n): ")
         if confirm != "y":
             print("Scope test cancelled.")
             return
-
+    
+    return'''
     # Create the new folder
     result_path = create_dataset_result_folder("")
-
+ 
+    with open("./result_path.txt", "w") as file:
+        file.write(str(result_path))
+    
     record += "Result path: " + result_path + "\n"
     record += 'SQL script: "' + sql_query + '"\n'
     record += "Included methods: " + str(method_ids) + "\n"
 
     record_path = os.path.join(result_path, "record.txt")
+   
     with open(record_path, "w") as f:
         f.write(record)
     print(Fore.GREEN + "The record has been saved at", record_path, Style.RESET_ALL)
 
     # Find all the files
     source_dir = os.path.join(dataset_dir, "direction_1")
-    print("source_dir = " , source_dir)
-    print("result_path = " , result_path)
+    #print("source_dir = " , source_dir)
+    #print("result_path = " , result_path)
     start_whole_process(source_dir, result_path, multiprocess=multiprocess, repair=repair)
     print("WHOLE PROCESS FINISHED")
     # Run accumulated tests
